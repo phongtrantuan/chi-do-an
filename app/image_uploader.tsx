@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, FileButton, FileInput, Image, List } from "@mantine/core";
 
 function ImageUploader() {
   const [file, setFile] = useState(null);
+  const [data, setData] = useState([]);
   const [preview, setPreview]: any = useState(null);
   const [uploaded, setUploaded]: any = useState(null);
-  const link_result =
-    "https://s3-alpha-sig.figma.com/img/9ebb/37a7/eb2e5b6b35e73e816af5a98dd0b0809d?Expires=1725840000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=glp7iL~m3gULOpRHq3VjBrcza51PHGwpEGTGvEqXOZ5Srij8LRwGKHXRrDtn-dlvW4DVdJDk2QvSn6Pzemoch4qzw62yuTuxmO70-QIDaOBXRwXtpUOHX7QClawBGnnpT9KcojYYtso0pHx192XYan4orQRZkmNumc7zBDvnt8FwQEXopGsTpALiUYIgPumMji~G3E3AAXFCQ6gvuuZvU-hciGh~DNexcKHTjs72bGWYNgjVT2LtvodL8EuHATPiaVSG7PvW6TL3yuqDnwI1w8Yc2kJyo62sVVQIdK~vTPjEdavZJpwmHyx6aEx3Wj7~GnGwN6Q0FtDLmwmSTxLKfg__";
+  const link_result = "/images/result_example.png";
   // Hàm xử lý khi người dùng chọn file
   const handleFileChange = (event: any) => {
     console.log(event);
@@ -28,13 +28,28 @@ function ImageUploader() {
     }
     console.log("out file", file);
   };
-  const handleUpload = (event: any) => {
+  const handleUpload = async (event: any) => {
     console.log("event", event);
     // const file = event.currentTarget.files[0];
     // const file = event;
     // setFile(event);
     console.log("file", file);
     // Tạo URL để hiển thị bản xem trước
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // const res = await fetch('/api', {
+    //   method: 'POST',
+    //   body: formData,
+    // });
+
+    // if (res.ok) {
+    //   alert('File uploaded successfully!');
+    // } else {
+    //   alert('Failed to upload file.');
+    // }
 
     if (file) {
       console.log("in file", file);
@@ -49,22 +64,57 @@ function ImageUploader() {
     console.log("out file", file);
   };
 
+  const fetchData = async () => {
+    console.log("fetching data");
+    const response = await fetch("http://localhost:3000/api");
+    console.log("response", response);
+    const data = await response.json();
+    console.log("checkkk");
+    console.log(data);
+    setData(data.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Tạo dữ liệu
+  const createData = async (newData: any) => {
+    const response = await fetch("/api/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newData),
+    });
+    const result = await response.json();
+    console.log(result);
+  };
+
+  // Cập nhật dữ liệu
+  const updateData = async (id: any, updateData: any) => {
+    const response = await fetch("/api/update", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, updateData }),
+    });
+    const result = await response.json();
+    console.log(result);
+  };
+
   return (
     <div className="flex h-full w-full">
       <div className="w-[300px]">
         <div className="flex justify-center text-2xl">History</div>
         <div>
-          <List
-            spacing="xs"
-            size="xl"
-            center
-          >
-            <List.Item className="bg-[#8CDFEB] opacity-[.67] p-2 flex justify-center">
-              Name Image
-            </List.Item>
-            <List.Item className="bg-[#8CDFEB] opacity-[.67] p-2 flex justify-center">
-              Name Image
-            </List.Item>
+          <List spacing="xs" size="xl" center>
+            {//@ts-ignore
+            data.map((item: any, id) => (
+              <List.Item
+                key={item + id}
+                className="bg-[#8CDFEB] opacity-[.67] p-2 flex justify-center"
+              >
+                {item.name}
+              </List.Item>
+            ))}
           </List>
         </div>
       </div>

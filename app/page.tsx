@@ -19,8 +19,8 @@ export default function Home() {
         <div className="flex justify-between h-full items-center">
           <div className="text-2xl font-bold px-4">DEMO</div>
           <div className="pr-4">
-            {listTabs.map((item) =>
-              <a className={`text-lg mx-2 ${item == tab && 'underline'}`}
+            {listTabs.map((item, id) =>
+              <a key={item + id} className={`text-lg mx-2 ${item == tab && 'underline'}`}
               onClick={() => setTab(item)}
               >{item}</a>)}
           </div>
