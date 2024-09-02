@@ -20,7 +20,7 @@ export default function Home() {
           <div className="text-2xl font-bold px-4">DEMO</div>
           <div className="pr-4">
             {listTabs.map((item, id) =>
-              <a key={item + id} className={`text-lg mx-2 ${item == tab && 'underline'}`}
+              <a key={item + id} className={`text-lg mx-2 cursor-pointer ${item == tab && 'underline'}`}
               onClick={() => setTab(item)}
               >{item}</a>)}
           </div>

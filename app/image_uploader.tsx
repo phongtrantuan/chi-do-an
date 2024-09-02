@@ -40,10 +40,15 @@ function ImageUploader() {
     const formData = new FormData();
     formData.append('file', file);
 
-    // const res = await fetch('/api', {
-    //   method: 'POST',
-    //   body: formData,
-    // });
+    const res = await fetch('/api', {
+      method: 'POST',
+      body: formData,
+    });
+    console.log("response", res);
+    const data = await res.json();
+    console.log("checkkk");
+    console.log(data);
+    setData(data.data);
 
     // if (res.ok) {
     //   alert('File uploaded successfully!');
@@ -110,7 +115,8 @@ function ImageUploader() {
             data.map((item: any, id) => (
               <List.Item
                 key={item + id}
-                className="bg-[#8CDFEB] opacity-[.67] p-2 flex justify-center"
+                className="bg-[#8CDFEB] cursor-pointer opacity-[.67] p-2 flex justify-center"
+                onClick={() => {}}
               >
                 {item.name}
               </List.Item>
