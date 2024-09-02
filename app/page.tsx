@@ -13,8 +13,9 @@ export default function Home() {
   return (
     <AppShell
       header={{ height: 60 }}
+      className="bg-gradient-to-b from-[#ECFCFE] to-[#8CDFEB]"
     >
-      <AppShell.Header>
+      <AppShell.Header className="bg-transparent">
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         <div className="flex justify-between h-full items-center">
           <div className="text-2xl font-bold px-4">DEMO</div>

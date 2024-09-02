@@ -9,8 +9,8 @@ function Evaluate() {
   // Hàm xử lý khi người dùng chọn
 
   return (
-    <div className="flex h-full w-full grow  bg-gradient-to-b from-[#ECFCFE] to-[#8CDFEB]">
-      <div className="grow bg-gradient-to-b from-[#ECFCFE] to-[#8CDFEB] justify-center">
+    <div className="flex h-full w-full grow ">
+      <div className="grow justify-center">
         <div className="flex justify-center items-center h-full w-1/2s">
           <Image
             src={link_image}

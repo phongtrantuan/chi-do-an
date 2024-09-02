@@ -7,6 +7,7 @@ function ImageUploader() {
   const [file, setFile] = useState(null);
   const [data, setData] = useState([]);
   const [preview, setPreview]: any = useState(null);
+  const [itemSelected, setItemSelected]: any = useState(null);
   const [loading, setLoading]: any = useState(false);
   const [uploaded, setUploaded]: any = useState(null);
   const [select, setSelect]: any = useState(null);
@@ -20,6 +21,7 @@ function ImageUploader() {
   };
 
   const handleSelectItem = (imageTest: any) => {
+    setItemSelected(imageTest)
     setPreview(imageTest.image_raw)
     setGlassPath(imageTest.glass)
     setReconstructionPath(imageTest.reconstruction)
@@ -125,7 +127,7 @@ function ImageUploader() {
 
   return (
     <div className="flex h-full w-full">
-      <div className="w-[300px] overflow-auto min-w-[300px]">
+      <div className="w-[300px] overflow-auto min-w-[300px] bg-white">
         <div className="flex justify-center text-2xl">History</div>
         <div>
           <List spacing="xs" size="xl" center>
@@ -134,7 +136,7 @@ function ImageUploader() {
               data.map((item: any, id) => (
                 <List.Item
                   key={item + id}
-                  className="bg-[#8CDFEB] cursor-pointer opacity-[.67] p-2 flex justify-center"
+                  className={`bg-[#8CDFEB] hover:bg-teal-400 hover:font-semibold cursor-pointer opacity-[.67] p-2 flex justify-center ${item.name == itemSelected?.name && "font-semibold bg-teal-400"}`}
                   onClick={() => {handleSelectItem(item)}}
                 >
                   {item.name}
@@ -144,7 +146,7 @@ function ImageUploader() {
           </List>
         </div>
       </div>
-      <div className="grow overflow-auto bg-gradient-to-b from-[#ECFCFE] to-[#8CDFEB]">
+      <div className="grow overflow-auto">
         <div className="h-[400px] flex justify-around bg-gradient-to-r from-[#A3C6D1] to-[#445EB9]">
           {preview && (
             <Image
@@ -182,7 +184,7 @@ function ImageUploader() {
                       <Image
                         src={"/spinning-dots.png"}
                         alt="Preview"
-                        style={{ height: "30%", objectFit: "contain" }}
+                        style={{ height: "30%", maxHeight:"300px", objectFit: "contain" }}
                         onClick={() => handleSelect(diffusionPath)}
                       />
                     </div>
@@ -205,7 +207,7 @@ function ImageUploader() {
                       <Image
                         src={"/spinning-dots.png"}
                         alt="Preview"
-                        style={{ height: "30%", objectFit: "contain" }}
+                        style={{ height: "30%", maxHeight:"300px", objectFit: "contain" }}
                         onClick={() => handleSelect(diffusionPath)}
                       />
                     </div>
@@ -230,7 +232,7 @@ function ImageUploader() {
                       <Image
                         src={"/spinning-dots.png"}
                         alt="Preview"
-                        style={{ height: "30%", objectFit: "contain" }}
+                        style={{ height: "30%", maxHeight:"300px", objectFit: "contain" }}
                         onClick={() => handleSelect(diffusionPath)}
                       />
                     </div>
