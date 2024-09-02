@@ -147,13 +147,16 @@ function ImageUploader() {
         </div>
       </div>
       <div className="grow overflow-auto">
-        <div className="h-[400px] flex justify-around bg-gradient-to-r from-[#A3C6D1] to-[#445EB9]">
+        <div className="h-[400px] flex justify-center bg-gradient-to-r from-[#A3C6D1] to-[#445EB9]">
           {preview && (
             <Image
               src={preview}
               alt="Preview"
               style={{ height: "100%", objectFit: "contain" }}
             />
+          )}
+          {select && (
+            <div className="px-8"></div>
           )}
           {select && (
             <Image
@@ -171,7 +174,7 @@ function ImageUploader() {
             >
               {(props) => <Button {...props}>Choose Image</Button>}
             </FileButton>
-            <div className="px-12"></div>
+            {file && <div className="px-12"></div>}
             {file && <Button onClick={handleUpload}>OK</Button>}
           </div>
           <div className="grid gap-x-16 grid-cols-3 px-4">
