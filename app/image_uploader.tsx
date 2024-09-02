@@ -144,7 +144,7 @@ function ImageUploader() {
           </List>
         </div>
       </div>
-      <div className="grow  bg-gradient-to-b from-[#ECFCFE] to-[#8CDFEB]">
+      <div className="grow overflow-auto bg-gradient-to-b from-[#ECFCFE] to-[#8CDFEB]">
         <div className="h-[400px] flex justify-around bg-gradient-to-r from-[#A3C6D1] to-[#445EB9]">
           {preview && (
             <Image
@@ -172,7 +172,7 @@ function ImageUploader() {
             <div className="px-12"></div>
             {file && <Button onClick={handleUpload}>OK</Button>}
           </div>
-          <div className="grid gap-x-16 grid-cols-3">
+          <div className="grid gap-x-16 grid-cols-3 px-4">
             {uploaded && (
               <>
                 <div>
@@ -192,7 +192,7 @@ function ImageUploader() {
                       <Image
                         src={diffusionPath}
                         alt="Preview"
-                        style={{ height: "80%", maxheight:"300px", objectFit: "contain" }}
+                        style={{ height: "80%", maxHeight:"300px", objectFit: "contain" }}
                         onClick={() => handleSelect(diffusionPath)}
                       />
                     </div>
@@ -215,7 +215,7 @@ function ImageUploader() {
                       <Image
                         src={glassPath}
                         alt="Preview"
-                        style={{ height: "80%", maxheight:"300px", objectFit: "contain" }}
+                        style={{ height: "80%", maxHeight:"300px", objectFit: "contain" }}
                         onClick={() => handleSelect(glassPath)}
                       />
                     </div>
@@ -240,7 +240,7 @@ function ImageUploader() {
                       <Image
                         src={reconstructionPath}
                         alt="Preview"
-                        style={{ height: "80%", maxheight:"300px", objectFit: "contain" }}
+                        style={{ height: "80%", maxHeight:"300px", objectFit: "contain" }}
                         onClick={() => handleSelect(reconstructionPath)}
                       />
                     </div>
